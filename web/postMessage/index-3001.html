@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3001</title>
+    Port 3001
+</head>
+<body>
+<script>
+    var data = '3001端口数据'
+    var target = 'http://localhost:3000'
+    window.addEventListener('message',function(e){
+      alert('iframe页面已经接收到了信息')
+      window.parent.postMessage('其他窗口已经接受到信息','*')
+    })
+</script>
+</body>
+</html>

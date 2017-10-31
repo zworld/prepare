@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .main{
+            margin-bottom: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        当前页面 3000端口
+    </div>
+    <div class="content"></div>
+    <iframe src="http://localhost:3001/index-3001.html" frameborder="1" width="500" height="500"></iframe>
+</body>
+<script>
+    document.cookie = "name=1"
+    function cb(content){
+      setTimeout(function(){
+        document.querySelector('.content').innerText = content
+      },1000)
+    }
+    var page3001 = document.querySelector('iframe')
+    page3001.src = page3001.src + '#3000端口页面改变iframe3001页面的hash值'
+</script>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>3000child页面</div>
+</body>
+<script>
+    window.onhashchange = function () {
+      console.log(location.hash)
+      window.parent.parent.cb(location.hash)
+    }
+</script>
+</html>

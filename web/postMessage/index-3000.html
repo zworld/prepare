@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3000</title>
+    <div>port3000</div>
+    <iframe frameborder="1"></iframe>
+    <script>
+      var childWindow =  document.querySelector('iframe');
+
+      childWindow.onload = function () {
+        childWindow.contentWindow.postMessage('13213','*')
+      }
+      childWindow.src="http://localhost:3001/index-3001.html"
+
+
+      window.addEventListener('message',function(e){
+        document.querySelector('.message').innerText = e.data
+      })
+    </script>
+    <div class="message"></div>
+</head>
+<body>
+
+</body>
+</html>

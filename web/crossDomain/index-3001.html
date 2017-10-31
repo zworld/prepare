@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        3001端口
+    </div>
+    <iframe src="http://localhost:3000/index-3000-child.html" frameborder="1" width="200" height="200"></iframe>
+</body>
+    <script>
+      setTimeout(()=>{
+        console.log(document.cookie)
+      },1000)
+        window.onhashchange = function(e){
+          setTimeout(function(){
+            document.querySelector('iframe').src = document.querySelector('iframe').src + '#3001通过嵌入的3000child，去访问child同域的顶端窗口'
+          },5000)
+        }
+    </script>
+</html>
