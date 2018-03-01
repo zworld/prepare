@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>border-collapse</title>
+    <style>
+        .content{
+            margin: 25px;
+            border: 1px solid black;
+        }
+        .clearfix:after{
+            content: '';
+            display: block;
+            width: 0px;
+            height: 0px;
+            clear: both;
+        }
+        .clearfix:before{
+            content: '';
+            display: block;
+            width: 0px;
+            height: 0px;
+            clear: both;
+        }
+        .title{
+            padding: 10px;
+            display: block;
+        }
+        .example1 div:nth-of-type(1){
+            margin-bottom: 50px;
+            background: red;
+        }
+        .example1 div:nth-of-type(2){
+            margin-top: 30px;
+            background: green;
+        }
+        .example2 .parent{
+            margin-top: 50px;
+        }
+        .example2 .child{
+            margin-top: 50px;
+            height: 50px;
+            width: 100%;
+            background: red;
+        }
+        .example3 .parent{
+            margin-bottom: 50px;
+        }
+        .example3 .child{
+            margin-bottom: 50px;
+            height: 50px;
+            width: 100%;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="example1 content">
+        <span class="title">兄弟块元素</span>
+        <div>margin-bottom: 50px;</div>
+        <div> margin-top: 30px;</div>
+    </div>
+    <div class="example2 content">
+        <span class="title">
+            父子元素下边距<br />
+            <i>如果块级父元素中，不存在上边框、上内边距、内联元素、 清除浮动 这四条属性（也可以说，当上边框宽度及上内边距距离为0时），那么这个块级元素和其第一个子元素的上边距就可以说”挨到了一起“。此时这个块级父元素和其第一个子元素就会发生上外边距合并现象，换句话说，此时这个父元素对外展现出来的外边距将直接变成这个父元素和其第一个子元素的margin-top的较大者。</i>
+        </span>
+        <div class="parent">
+            <div class="child">父亲元素为bfc，inline-block/float/overflow等 外边距叠加失效，子元素为inline-block,float不包括overflow 也失效</div>
+        </div>
+    </div>
+    <div class="example3 content">
+    <span class="title">
+            父子元素下边距<br />
+            <i>类似的，若块级父元素的 margin-bottom 与它的最后一个子元素的margin-bottom 之间没有父元素的 border、padding、inline content、height、min-height、 max-height 分隔时，就会发生 下外边距合并 现象。</i>
+        </span>
+    <div class="parent">
+        <div class="child">父亲元素为bfc，inline-block/float/overflow等 外边距叠加失效，子元素为inline-block,float不包括overflow 也失效</div>
+    </div>
+    </div>
+</body>
+</html>
