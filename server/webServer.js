@@ -20,7 +20,7 @@ var libHttp = require('http'); //HTTP协议模块
 var libUrl = require('url'); //URL解析模块
 var libFs = require("fs"); //文件系统模块
 var libPath = require("path"); //路径解析模块
-
+var path = require("path")
 //依据路径获取返回内容类型字符串,用于http响应头
 var funGetContentType = function (filePath) {
   var contentType = "";
@@ -80,8 +80,8 @@ var funWebSvr = function (req, res) {
   }
 
   //使用路径解析模块,组装实际文件路径
-  var filePath = libPath.join("./", pathName);
-
+  var filePath = libPath.join("../web", pathName);
+  console.log(filePath)
   //判断文件是否存在
   libFs.exists(filePath, function (exists) {
     //文件存在
