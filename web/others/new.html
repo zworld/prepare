@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>new</title>
+</head>
+<body>
+    <h1>new</h1>
+    1、创建object
+    2、apply绑定object去执行构造函数
+    3、判断构造函数执行后是否返回对象
+    4、将object的__proto__指向构造函数的prototype
+    5、返回object
+</body>
+<script>
+    function _new(constructor,...args){
+      let result = new Object();
+      let funResult = constructor.apply(result,args);
+      result = Object.prototype.toString.call(funResult) === "[object Object]" ? funResult : result;
+      result.__proto__ = constructor.prototype
+      return result
+    }
+    function People(name,age){
+      this.name = name;
+      this.age = age;
+
+    }
+    let result = _new(People,'zhongxinzhi','25')
+    console.log(result)
+</script>
+</html>

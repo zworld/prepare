@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>apply,bind,call</title>
+</head>
+<body>
+<h1>bind</h1>
+利用apply 或者 call以及函数柯里化
+<h1>call apply</h1>
+1、用bind处理（注意bind参数处理）
+2、通过属性方法进行处理（注意属性是否存在于原有对象上）
+</body>
+</html>
+<script>
+  Function.prototype._bind = function (obj,...bindArgs) {
+    return (...args) => {
+      let params =bindArgs.concat(args)
+      this.apply(obj, params)
+    }
+  }
+  function people(word) {
+    console.log(this.name)
+    word ? console.info(`say ${word}`) : null
+  }
+  let obj = {name: 'zhongxinzhi'}
+  let bindPeople = people._bind(obj);
+  bindPeople()
+  /*
+   call
+   */
+  Function.prototype._call = function (obj,args) {
+    return this.bind(obj ? obj : window,...args)()
+  }
+  people._call(obj,['test'])
+  /**
+   * apply
+   */
+  Function.prototype._apply = function(obj,...args){
+    let callObj = obj ? obj : window;
+    let temp = callObj.__fun__;
+    callObj.__fun__ = this;
+    let result = obj.__fun__(...args);
+    delete callObj.__fun__;
+    if(temp !== undefined) callObj.__fun__ = temp
+    return result
+  }
+  people._apply(obj,'call')
+</script>
