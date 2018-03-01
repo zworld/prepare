@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>twoWay</title>
+</head>
+<body>
+    <h1>双向链表</h1>
+</body>
+</html>
+<script>
+    function Node(item){
+        this.element = item;
+        this.next = null;
+        this.previous = null;
+    }
+    function LList(){
+      this.head = new Node('head');
+      this.find = (item)=>{
+        let currentItem = this.head;
+        while(true){
+          if(currentItem.element == item) break
+          currentItem = currentItem.next
+        }
+        return currentItem
+      }
+      this.insert = (newItem, item, type='next')=>{
+        let insertedNode = this.find(item);
+        let newNode = new Node(newItem);
+        if(type==='next'){
+          let nextNode = insertedNode.next;
+          insertedNode.next = newNode;
+          newNode.previous = insertedNode;
+          newNode.next = nextNode;
+          if(nextNode) nextNode.previous = newNode
+        }else {
+          let previousNode = insertedNode.previous;
+          insertedNode.previous = newNode;
+          newNode.next = insertedNode;
+          newNode.previous = previousNode;
+          previousNode.next = newNode
+        }
+      }
+      //删除
+      this.delete = (item)=>{
+        let node = this.find(item);
+        let previousNode = node.previous;
+        let nextNode = node.next;
+        previousNode.next = nextNode;
+        if(nextNode) nextNode.previous= previousNode
+      }
+      this.display = ()=>{
+        let currentItem = this.head;
+        while(true){
+            console.log(currentItem.element)
+            if(!currentItem.next) break
+            currentItem = currentItem.next
+        }
+      }
+    }
+    let list = new LList();
+    list.insert('test','head')
+    list.insert('test2','head')
+    list.insert('test3','test')
+    list.insert('test4','test3','previous')
+    list.delete('test')
+    list.delete('test3')
+    list.display()
+</script>

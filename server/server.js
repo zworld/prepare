@@ -30,10 +30,10 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 // app.use('/data', express.static(resolve('dist/data')));
 
 app.get('/*', function(req, res){
-
-  fs.exists(resolve(`/${req.path}`), (exists) => {
-    if(exists){
-      res.sendFile(resolve(`/${req.path}`));
+  let filePath = resolve(`/${req.path}`)
+  fs.exists(filePath, (exists) => {
+    if(exists&&path.extname(filePath)){
+      res.sendFile(filePath);
     }else{
       res.sendFile(resolve(`/index.html`));
     }

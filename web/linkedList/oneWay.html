@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>oneWay</title>
+</head>
+<body>
+    <h1>单链表</h1>
+</body>
+</html>
+<script>
+    function Node(element){
+      this.element = element;
+      this.next = null;
+    }
+    function LList(){
+        this.head = new Node('head')
+        //获取最后一个元素
+        this.trail = ()=>{
+            let currentItem = this.head;
+            while(true){
+              if(!currentItem.next){
+                break
+              }
+              currentItem = currentItem.next
+            }
+            return currentItem
+        }
+        //插入
+        this.insert = (newItem,item) =>{
+            let insertedItem = item ? this.find(item) : this.trail();
+            let newNode = new Node(newItem)
+            let next = insertedItem.next;
+            insertedItem.next = newNode;
+            newNode.next = next
+        }
+        //查找
+        this.find = (item)=>{
+            let currentItem = this.head;
+            while(true) {
+              if (currentItem.element === item) break
+              currentItem = currentItem.next
+            }
+            return currentItem
+        }
+        //展示
+        this.display = ()=>{
+          let currentItem = this.head;
+          while(true){
+            console.log(currentItem.element);
+            if(!currentItem.next) break
+            currentItem = currentItem.next
+          }
+        }
+        //查找元素前一个
+        this.findPrevious = (item) =>{
+            let currentItem = this.head;
+            while(true){
+              if(currentItem.next.element==item) break
+              currentItem = currentItem.next
+            }
+            return currentItem
+        }
+        //删除
+        this.delete = (item)=>{
+          let node = this.find(item);
+          let preNode = this.findPrevious(item);
+          let next = node.next
+          preNode.next = next
+        }
+    }
+
+    //test
+    let list = new LList()
+    list.insert('test')
+    list.insert('test2')
+    list.insert('test1','test')
+    list.delete('test1')
+    list.delete('test2')
+    list.display()
+</script>
