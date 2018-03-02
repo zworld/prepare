@@ -9,5 +9,107 @@
 </body>
 </html>
 <script>
+    function Node(val){
+      this.value = val;
+      this.left = null;
+      this.right = null;
+    }
 
+    function Tree(){
+      this.root = null;
+      this.insert = function(val){
+        let node = new Node(val);
+        if(!this.root) this.root = node
+        else{
+          let currentItem = this.root
+          while(true){
+            if(currentItem.value > node.value){
+              if(!currentItem.left){
+                currentItem.left = node
+                break
+              }else{
+                currentItem = currentItem.left
+              }
+            }else{
+              if(!currentItem.right){
+                currentItem.right = node
+                break
+              }else{
+                currentItem = currentItem.right
+              }
+            }
+          }
+        }
+      }
+      this.centerOrder = function(node){
+        if(node){
+            this.preOrder(node.left)
+            console.log(node.value)
+            this.preOrder(node.right)
+        }
+      }
+      this.preOrder = function (node) {
+        if(node){
+          console.log(node.value)
+          this.preOrder(node.left)
+          this.preOrder(node.right)
+        }
+      }
+      this.lastOrder = function (node) {
+        if(node){
+          this.preOrder(node.left)
+          this.preOrder(node.right)
+          console.log(node.value)
+        }
+      }
+      this.widthOrder = function(node){
+        if(node){
+          let quence = [node];
+          while (quence.length){
+            let ouputNode = quence.shift();
+            if(ouputNode.left) quence.push(ouputNode.left)
+            if(ouputNode.right) quence.push(ouputNode.right)
+            console.log(ouputNode.value)
+          }
+        }
+
+      }
+      this.deepOrder = function(node){
+        let quence = [node]
+        while(quence.length){
+          let currentNode = quence.pop();
+          if(currentNode.right) quence.push(currentNode.right)
+          if(currentNode.left) quence.push(currentNode.left)
+          console.log(currentNode.value)
+        }
+      }
+      this.find = function(tree,item){
+        if(!tree.root) return false
+        let quence = [tree.root];
+        while (quence.length){
+          let currentNode = quence.pop();
+          if(currentNode.value === item) return currentNode
+          if(currentNode.right) quence.push(currentNode.right)
+          if(currentNode.left) quence.push(currentNode.left)
+        }
+        return false
+      }
+    }
+    let tree = new Tree();
+    let list = [6,8,10,2,1,5];
+    for(let value of list){
+      tree.insert(value)
+    }
+    console.log('先序遍历')
+    tree.preOrder(tree.root)
+    console.log('中序遍历')
+    tree.centerOrder(tree.root)
+    console.log('后续遍历')
+    tree.lastOrder(tree.root)
+    console.log('广度优先遍历')
+    tree.widthOrder(tree.root)
+    console.log('深度优先遍历')
+    tree.deepOrder(tree.root)
+    console.log('查找')
+    console.log(tree.find(tree,8))
 </script>
