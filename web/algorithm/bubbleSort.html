@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>冒泡排序</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    function bubbleSort(arr) {
+        let len = arr.length-1;
+        for(let i = len;i>0;i--){
+	        let suc = true
+	        for(let j = 0; j<i;j++){
+        		if(arr[j]>arr[j+1]){
+        			let temp = arr[j];
+        			arr[j] = arr[j+1];
+        			arr[j+1] = temp
+                    suc = false
+                }
+            }
+            if(suc) return
+        }
+    }
+    let arr = [1,4,2,0];
+    bubbleSort(arr)
+    console.log(arr)
+</script>

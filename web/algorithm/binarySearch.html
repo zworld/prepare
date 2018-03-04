@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>二分查找法</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+	function binaryFind(arr, el) {
+		let arrCopy = arr.slice().sort((a, b) => a - b),
+			len = arrCopy.length-1;
+			low = 0,
+			high = len;
+      while(high >= low){
+      	let mid = Math.floor((low+high)/2)
+        if(arr[mid]<el) low = mid+1;
+      	else if(arr[mid]>el) high = mid - 1;
+      	else if(arr[mid]===el){
+	        return true
+      	}
+      }
+      return false
+	}
+	let arr = [1,2,3,4,5]
+    console.log(binaryFind(arr,3))
+</script>

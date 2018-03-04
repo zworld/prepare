@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>快速排序</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    function quickSort(arr){
+    	let len = arr.length;
+    	if(len<=1) return arr
+        let mid = [],
+            left = [],
+            right = [];
+        arr.forEach(val=>{
+          if(val>arr[0]) right.push(val)
+          if(val<arr[0]) left.push(val)
+          else mid.push(val)
+        })
+        return quickSort(left).concat(arr[0],quickSort(right))
+    }
+    function quickSortByOneLine(arr){
+    	return arr.length <= 1 ? arr : quickSortByOneLine(arr.filter(val=>arr[0]>val)).concat(arr[0], quickSortByOneLine(arr.filter(val=>arr[0]<val)))
+    }
+    var arr = [3,7,2,4,1,0]
+    console.log(quickSort(arr))
+    console.log(quickSortByOneLine(arr))
+
+</script>
