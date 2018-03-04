@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ksum</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+     * arr=[1,2,3,4] count=7
+     * */
+		let result = [];
+		let sum = (group) => {
+			return group.reduce((pre, next) => pre + next, 0)
+		}
+		function getCountGroup(arr, index = 0, count, group = []) {
+			let len = arr.length;
+			for (let i = index; i < len; i++) {
+				let newGroup = group.slice()
+				newGroup.push(arr[i])
+				let newGroupSum = sum(newGroup)
+				if (newGroupSum === count) result.push(newGroup)
+				else if (newGroupSum < count) {
+					getCountGroup(arr, i + 1, count, newGroup)
+				} else {
+					continue
+				}
+			}
+		}
+		let arr = [1, 2, 3, 4];
+		let count = 7;
+		getCountGroup(arr, 0, count);
+		console.log(result)
+</script>
