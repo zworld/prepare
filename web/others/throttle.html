@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>throttle</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+	function throttle(fn, wait, leading = false) {
+		let happen = 0;
+		let timer = null;
+		let first = false;
+		let context = this;
+		return function (...args) {
+			if (leading && !first) {
+				happen = Date.now()
+                first = true;
+				fn.apply(context, args)
+			} else {
+				let now = Date.now()
+				let remain = happen ? wait - (Date.now() - happen) : wait;
+				if (remain > wait || remain < 0) {
+					happen = now;
+					fn.apply(context, args)
+				}else{
+                    happen = now;
+					clearTimeout(timer)
+                    timer = null;
+                    console.log(remain)
+					timer = setTimeout(()=>{
+						fn.apply(context,args)
+                    },remain)
+                }
+			}
+		}
+	}
+
+		let test = throttle(function(name){
+			console.log(name)
+		},3000,false)
+		test('zhong')
+    setTimeout(()=>{
+	    test('zhongxinzhi')
+    },100)
+		test('zhong')
+		test('zhong')
+</script>
