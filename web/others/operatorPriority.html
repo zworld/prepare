@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>运算符优先级</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    //	字段访问、数组下标、函数调用以及表达式分组（当括号隔开.时，new优先级更高)
+    {
+	    function Obj(){
+		    return {
+			    a: 1
+		    }
+	    }
+	    let m = {
+		    n:function(){
+			    return {
+				    a:1
+			    }
+		    }
+	    }
+	    console.log(new Obj().a)
+	    console.log(new m.n().a)
+    }
+
+
+    //一元运算符、返回数据类型、对象创建、未定义值
+    {
+    	let a = 1;
+    	console.log(a+++1)
+    }
+
+    //	乘法、除法、取模
+    //	加法、减法、字符串连接
+    //	小于、小于等于、大于、大于等于、instanceof
+    //等于、不等于、严格相等、非严格相等
+    //	逻辑与
+    //	逻辑或
+    //三元运算符 ?:
+    //赋值 =
+    //	多重求值 ,
+
+</script>
